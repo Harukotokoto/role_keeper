@@ -1,17 +1,23 @@
-require("dotenv").config();
-import { ExtendedClient, log } from "./lib/classes/ExtendedClient";
+require('dotenv').config();
+import { ExtendedClient } from './lib/modules/ExtendedClient';
 
-export const client = new ExtendedClient();
+export const client = new ExtendedClient({
+  intents: [
+    'Guilds',
+    'GuildMessages',
+    'MessageContent',
+  ],
+});
 
 console.clear();
 client.start();
 
-process.on("uncaughtException", async (error: Error) => {
-  log(error.toString(), "ERROR");
-  return error;
+process.on('uncaughtException', async (e) => {
+  client.Logger.error(e);
+  return e;
 });
 
-process.on("unhandledRejection", async (error: Error) => {
-  log(error.toString(), "ERROR");
-  return error;
+process.on('unhandledRejection', async (e) => {
+  client.Logger.error(e);
+  return e;
 });

@@ -6,8 +6,8 @@ import {
   MessageContextMenuCommandInteraction,
   PermissionResolvable,
   UserContextMenuCommandInteraction,
-} from "discord.js";
-import { ExtendedClient } from "../classes/ExtendedClient";
+} from 'discord.js';
+import { ExtendedClient } from '../modules/ExtendedClient';
 
 type MessageExecuteType = ({
   client,

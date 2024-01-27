@@ -1,10 +1,13 @@
-import { Event } from "../../lib/classes/Event";
-import { client } from "../../index";
-import { Colors, Events } from "discord.js";
-import { footer } from "../../lib/handlers/component/Embed";
+import { Event } from '../../lib/modules/Event';
+import { client } from '../../index';
+import { CommandError, ErrorTypes } from '../../lib/utils/CommandError';
 
-export default new Event(Events.MessageCreate, async (message) => {
-  const prefix = ".";
+export default new Event('messageCreate', async (message) => {
+  const prefix = '.';
+
+  console.log(message);
+
+  const Error = new CommandError(message);
 
   if (
     message.author.bot ||
@@ -23,40 +26,22 @@ export default new Event(Events.MessageCreate, async (message) => {
     client.commands.get(cmd.toLowerCase()) ||
     client.commands.find((c) => c.aliases?.includes(cmd.toLowerCase()));
 
-  if (!command) return;
+  if (!command || !command.execute.message) return;
 
-  if (!command.execute.message) {
-    return await message.reply({
-      embeds: [
-        {
-          description: "このコマンドはスラッシュコマンドに対応していません",
-          color: Colors.Yellow,
-          footer: footer(),
-        },
-      ],
-      allowedMentions: {
-        parse: [],
-      },
-    });
-  }
+  // Enter Admin ID(s)
+  const admins: string[] = [];
 
-  const admins = ["1004365048887660655"];
+  if (command.isOwnerCommand && !admins.includes(message.author.id))
+    return await Error.create(
+      'このコマンドはBot関係者のみ実行可能です',
+      ErrorTypes.Warn
+    );
 
-  if (command.isOwnerCommand && !admins.includes(message.author.id)) {
-    return await message.reply({
-      embeds: [
-        {
-          title: "エラーが発生しました",
-          description: "このコマンドはBot管理者限定です",
-          color: Colors.Red,
-          footer: footer(),
-        },
-      ],
-      allowedMentions: {
-        parse: [],
-      },
-    });
-  }
+  const member = message.guild?.members.cache.get(message.author.id);
+  if (!member) return;
+
+  if (!member.permissions.has(command.requiredPermissions || []))
+    return await Error.create('このコマンドを使用する権限が不足しています');
 
   await command.execute.message({ client, message, args });
 });

@@ -1,26 +1,37 @@
 {
-  "name": "djs_base_handler",
+  "name": "25h_at_discord",
   "version": "1.0.0",
-  "description": "TypeScriptでBotを作成する時の基礎です",
+  "description": "25時、ディスコードで。",
   "main": "./dist/index.js",
-  "repository": "git@github.com:RenaOfficial/djs_base_handler.git",
+  "repository": "git@github.com:RenaOfficial/25h_at_discord.git",
   "author": "https://github.com/RenaOfficial",
   "license": "MIT",
   "scripts": {
     "build": "tsc -p .",
-    "start": "node ./dist/index.js",
+    "start": "node --trace-warnings ./dist/index.js",
     "dev": "run-s build start",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "git:pull": "git pull origin main",
+    "pm2:restart": "pm2 restart 25h_at_discord",
+    "restart": "run-s git:pull build pm2:restart"
   },
   "dependencies": {
+    "axios": "^1.6.5",
+    "canvas": "^2.11.2",
     "discord.js": "^14.14.1",
+    "dotenv": "^16.3.2",
     "glob": "^7.2.3",
     "moment": "^2.30.1",
-    "mongoose": "^8.1.0"
+    "mongoose": "^8.1.0",
+    "ms": "^2.1.3",
+    "node-os-utils": "^1.3.7"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",
+    "@types/moment": "^2.13.0",
+    "@types/ms": "^0.7.34",
     "@types/node": "^20.11.5",
+    "@types/node-os-utils": "^1.3.4",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.2.4",
     "typescript": "^5.3.3"
