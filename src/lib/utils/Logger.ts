@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { BC, C, Reset } from './index';
+import { BC, C, Reset } from './LogColor';
 
 export class Logger {
   public info(message: any) {

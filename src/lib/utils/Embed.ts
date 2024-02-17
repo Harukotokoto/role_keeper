@@ -7,7 +7,6 @@ import {
   TextChannel,
 } from 'discord.js';
 import { client } from '../../index';
-import osu from 'node-os-utils';
 
 const footer = (): APIEmbedFooter => {
   const user = client.users.cache.get('1004365048887660655');
