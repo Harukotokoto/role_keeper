@@ -19,9 +19,9 @@ export default new Command({
               `**WebSocket:** \`${client.ws.ping}\`ms\n` +
               `**Latency:** \`${response}\`ms`,
             color: Colors.Green,
-            footer: footer()
-          }
-        ]
+            footer: footer(),
+          },
+        ],
       });
     },
     message: async ({ client, message }) => {
@@ -35,13 +35,13 @@ export default new Command({
               `**WebSocket:** \`${client.ws.ping}\`ms\n` +
               `**Latency:** \`${response}\`ms`,
             color: Colors.Green,
-            footer: footer()
-          }
+            footer: footer(),
+          },
         ],
         allowedMentions: {
-          parse: []
-        }
+          parse: [],
+        },
       });
-    }
-  }
+    },
+  },
 });

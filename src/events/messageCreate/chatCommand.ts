@@ -34,7 +34,7 @@ export default new Event('messageCreate', async (message) => {
   if (command.isOwnerCommand && !admins.includes(message.author.id))
     return await Error.create(
       'このコマンドはBot関係者のみ実行可能です',
-      ErrorTypes.Warn
+      ErrorTypes.Warn,
     );
 
   const member = message.guild?.members.cache.get(message.author.id);

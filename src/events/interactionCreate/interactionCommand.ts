@@ -2,7 +2,7 @@ import {
   ApplicationCommandType,
   ChatInputCommandInteraction,
   MessageContextMenuCommandInteraction,
-  UserContextMenuCommandInteraction
+  UserContextMenuCommandInteraction,
 } from 'discord.js';
 import { client } from '../../index';
 import { Event } from '../../lib/modules/Event';
@@ -15,7 +15,7 @@ export default new Event('interactionCreate', async (interaction) => {
     const Error = new CommandError(interaction);
 
     await interaction.deferReply({
-      ephemeral: command?.ephemeral || false
+      ephemeral: command?.ephemeral || false,
     });
 
     if (!command) return await Error.create('コマンドが存在しません');
@@ -23,7 +23,7 @@ export default new Event('interactionCreate', async (interaction) => {
     if (!command.execute.interaction)
       return await Error.create(
         'コマンドがスラッシュコマンドに対応していません',
-        ErrorTypes.Warn
+        ErrorTypes.Warn,
       );
 
     // Enter Admin ID(s)
@@ -32,7 +32,7 @@ export default new Event('interactionCreate', async (interaction) => {
     if (command.isOwnerCommand && !admins.includes(interaction.user.id))
       return await Error.create(
         'このコマンドはBot関係者のみ実行可能です',
-        ErrorTypes.Warn
+        ErrorTypes.Warn,
       );
 
     const member = interaction.guild?.members.cache.get(interaction.user.id);
@@ -44,21 +44,21 @@ export default new Event('interactionCreate', async (interaction) => {
     if (!command.type || command.type === ApplicationCommandType.ChatInput) {
       await command.execute.interaction({
         client,
-        interaction: interaction as ChatInputCommandInteraction
+        interaction: interaction as ChatInputCommandInteraction,
       });
     }
 
     if (command.type === ApplicationCommandType.Message) {
       await command.execute.interaction({
         client,
-        interaction: interaction as MessageContextMenuCommandInteraction
+        interaction: interaction as MessageContextMenuCommandInteraction,
       });
     }
 
     if (command.type === ApplicationCommandType.User) {
       await command.execute.interaction({
         client,
-        interaction: interaction as UserContextMenuCommandInteraction
+        interaction: interaction as UserContextMenuCommandInteraction,
       });
     }
   }
