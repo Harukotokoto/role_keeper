@@ -1,6 +1,6 @@
 import { Command } from '../../lib/modules/Command';
 import { Colors } from 'discord.js';
-import { footer } from '../../lib/utils/Embed';
+import { footer } from '../../lib/utils/embed';
 
 export default new Command({
   name: 'ping',
