@@ -1,6 +1,5 @@
 import { Command } from '../../lib/modules/Command';
 import { Colors } from 'discord.js';
-import { footer } from '../../lib/utils/embed';
 
 export default new Command({
   name: 'ping',
@@ -19,7 +18,7 @@ export default new Command({
               `**WebSocket:** \`${client.ws.ping}\`ms\n` +
               `**Latency:** \`${response}\`ms`,
             color: Colors.Green,
-            footer: footer(),
+            footer: client.footer(),
           },
         ],
       });
@@ -35,7 +34,7 @@ export default new Command({
               `**WebSocket:** \`${client.ws.ping}\`ms\n` +
               `**Latency:** \`${response}\`ms`,
             color: Colors.Green,
-            footer: footer(),
+            footer: client.footer(),
           },
         ],
         allowedMentions: {

@@ -1,5 +1,5 @@
 import { Colors, CommandInteraction, Message } from 'discord.js';
-import { footer } from '../../utils/embed';
+import { client } from '../../..';
 
 export enum ErrorTypes {
   Warn = Colors.Yellow,
@@ -24,7 +24,7 @@ export class CommandError {
                 : undefined,
             description: message,
             color: ErrorType || Colors.Red,
-            footer: footer(),
+            footer: client.footer(),
           },
         ],
       });
@@ -38,7 +38,7 @@ export class CommandError {
                 : undefined,
             description: message,
             color: ErrorType || Colors.Red,
-            footer: footer(),
+            footer: client.footer(),
           },
         ],
         allowedMentions: {

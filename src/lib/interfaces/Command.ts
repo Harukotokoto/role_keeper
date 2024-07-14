@@ -7,14 +7,14 @@ import {
   PermissionResolvable,
   UserContextMenuCommandInteraction,
 } from 'discord.js';
-import { ExtendedClient } from '../modules/ExtendedClient';
+import { Client } from '../modules/Client';
 
 type MessageExecuteType = ({
   client,
   message,
   args,
 }: {
-  client: ExtendedClient;
+  client: Client;
   message: Message;
   args: string[];
 }) => any;
@@ -38,7 +38,7 @@ type Command<
       client,
       interaction,
     }: {
-      client: ExtendedClient;
+      client: Client;
       interaction: T extends ApplicationCommandType.ChatInput
         ? ChatInputCommandInteraction
         : T extends ApplicationCommandType.Message
@@ -56,7 +56,7 @@ type CommandWithDefault = {
       client,
       interaction,
     }: {
-      client: ExtendedClient;
+      client: Client;
       interaction: ChatInputCommandInteraction;
     }) => any;
     message?: MessageExecuteType;

@@ -1,5 +1,6 @@
 import {
-  Client,
+  APIEmbedFooter,
+  Client as DiscordClient,
   ClientEvents,
   ClientOptions,
   Collection,
@@ -17,7 +18,7 @@ import moment from 'moment';
 
 const globPromise = promisify(glob);
 
-export class ExtendedClient extends Client {
+export class Client extends DiscordClient {
   public commands: Collection<string, CommandType> = new Collection<
     string,
     CommandType
@@ -28,6 +29,14 @@ export class ExtendedClient extends Client {
   public constructor(options: ClientOptions) {
     super(options);
   }
+
+  public footer = (): APIEmbedFooter => {
+    const user = this.users.cache.get('1004365048887660655');
+    return {
+      text: `Produced by ${user?.displayName}`,
+      icon_url: user?.avatarURL() as string,
+    };
+  };
 
   public start(): void {
     this.login(process.env.CLIENT_TOKEN).then(() => {
