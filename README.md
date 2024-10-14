@@ -1,12 +1,4 @@
-# Discord.js Base Handler
-
-Discord Botを作成するための基盤です
-
-## 使用方法
-
-1. `yarn install`または`npm install`で必要なパッケージをインストールしてください
-2. `.env`ファイルを編集し、TOKENを入力してください
-3. `yarn build`でビルドし、`yarn start`で起動します。
-
-- ※`yarn dev`でショートカットできます
-- ※`yarn format`でPrettierでフォーマットができます
+# Role Keeper
+導入するだけで使えるロールキーパーBotです。
+導入すると、サーバーから抜けた時にロールが保持され、再参加時にロールを自動的に付与することができます。
+**__Role Keeperのロールの高さを上位に設定しないと再入室時にロールを付与することができません__**
