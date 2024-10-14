@@ -2,7 +2,7 @@ require('dotenv').config();
 import { Client } from './lib/modules/Client';
 
 export const client = new Client({
-  intents: ['Guilds', 'GuildMessages', 'MessageContent'],
+  intents: ['Guilds', 'GuildMembers'],
 });
 
 console.clear();
